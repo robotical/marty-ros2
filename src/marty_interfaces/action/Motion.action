@@ -1,0 +1,27 @@
+# Firmware remains responsible for gait generation. Only one goal is admitted.
+uint8 WALK=0
+uint8 DANCE=1
+uint8 KICK=2
+uint8 STAND=3
+uint8 MOVE_JOINT=4
+uint8 command
+# WALK: 1..10 steps, auto/left/right starting foot, -100..100 degrees,
+# -50..50 mm step length. A zero step length permits turning in place.
+uint8 num_steps
+string side
+int16 turn_degrees
+int16 step_length_mm
+# All commands: 100..10000 ms; WALK uses this duration per step.
+uint32 move_time_ms
+# MOVE_JOINT: firmware servo ID 0..8, angle -90..90 degrees.
+uint8 joint_id
+int16 position_degrees
+---
+# Success requires fresh post-command status indicating an empty, idle queue.
+bool success
+string message
+---
+string phase
+float64 elapsed_seconds
+bool moving
+uint32 queued_movements

@@ -1,0 +1,12 @@
+/**:
+  ros__parameters:
+    subscribe_rate_hz: 10.0
+    auto_reconnect: true
+    stale_after_seconds: 2.0
+    reconnect_interval_seconds: 2.0
+    completion_margin_seconds: 5.0
+    # Default names describe firmware servos; URDF signs/offsets need calibration.
+    joint_map: '{}'
+    acceleration_scale: 9.80665
+    imu_frame: marty_accelerometer
+    battery_frame: marty_battery

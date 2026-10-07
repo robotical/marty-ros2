@@ -1,0 +1,10 @@
+.venv/
+.validation/
+.runtime/
+build/
+install/
+log/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc

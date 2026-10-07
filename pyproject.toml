@@ -1,0 +1,10 @@
+[tool.pytest.ini_options]
+testpaths = ["src/marty_driver/test"]
+pythonpath = ["src/marty_driver"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
