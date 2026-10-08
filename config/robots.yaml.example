@@ -1,0 +1,14 @@
+# Copy to robots.yaml and set the connection for each Marty V2.
+# Entry names are ROS namespaces. Launch selects one entry with namespace:=marty.
+martys:
+  marty:
+    method: usb
+    locator: /dev/serial/by-id/REPLACE_WITH_MARTY_DEVICE
+    # For Wi-Fi, replace the two lines above with:
+    # method: wifi
+    # locator: 192.168.1.8  # Actual IP or hostname, without http:// or ws://.
+    serial_baud: 115200
+    wifi_port: 80
+    auto_connect: false
+    auto_reconnect: false
+    subscribe_rate_hz: 10.0

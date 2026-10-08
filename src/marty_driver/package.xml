@@ -5,11 +5,11 @@
   <description>MartyPy-backed ROS 2 driver for physical Marty V2 robots.</description>
   <maintainer email="hello@robotical.io">Robotical</maintainer>
   <license>Apache-2.0</license>
-  <buildtool_depend>ament_python</buildtool_depend>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>rcl_interfaces</exec_depend>
   <exec_depend>marty_interfaces</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
   <exec_depend>std_srvs</exec_depend>
   <exec_depend>diagnostic_msgs</exec_depend>
   <test_depend>python3-pytest</test_depend>

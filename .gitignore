@@ -8,3 +8,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.pyc
+.vscode/
+# Per-machine paths and physical connections; keep examples in Git.
+config/machine.env
+config/robots.yaml

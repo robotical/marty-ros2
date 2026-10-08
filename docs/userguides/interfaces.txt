@@ -1,0 +1,121 @@
+---json
+{"name": "Topics, services and movement"}
+---
+====== Topics, services and movement ======
+{{indexmenu_n>20}}
+
+Start with [[:martyv2:ros2:getting_started|Install and connect]]. Run commands in a terminal prepared with ''source scripts/setup_env.sh''.
+
+===== 1 - Inspect the ROS graph =====
+
+<code bash>
+ros2 node list
+ros2 node info /marty/marty_driver
+ros2 topic list -t
+ros2 service list -t
+ros2 action list -t
+</code>
+
+The driver node publishes topics, serves connection/control requests and provides a movement action. Names below use the default ''/marty'' namespace.
+
+^ Topic ^ Message type ^ Contents ^
+| ''/marty/imu/data_raw'' | ''sensor_msgs/msg/Imu'' | Acceleration in m/s²; no gyro or orientation. |
+| ''/marty/joint_states'' | ''sensor_msgs/msg/JointState'' | Valid measured positions in radians; velocity and effort are empty. |
+| ''/marty/servo_states'' | ''marty_interfaces/msg/ServoStates'' | Servo angles, current in amperes, flags and communication validity. |
+| ''/marty/battery'' | ''sensor_msgs/msg/BatteryState'' | Valid battery information; percentage is 0–1 and capacities are Ah. |
+| ''/marty/telemetry'' | ''marty_interfaces/msg/Telemetry'' | Decoded SDK data with original names, units and validity flags. |
+| ''/marty/status'' | ''marty_interfaces/msg/DriverStatus'' | Connection state, freshness, movement state, queue and errors. |
+| ''/marty/diagnostics'' | ''diagnostic_msgs/msg/DiagnosticArray'' | Connection and telemetry health. |
+
+Measurement topics use best-effort QoS. Status is reliable and transient-local. Measurements are published only when fresh SDK data arrives, with host receipt timestamps.
+
+<code bash>
+ros2 topic echo /marty/joint_states --qos-reliability best_effort
+ros2 topic echo /marty/battery --qos-reliability best_effort
+ros2 interface show marty_interfaces/msg/DriverStatus
+</code>
+
+===== 2 - Services =====
+
+All three services use ''std_srvs/srv/Trigger'' with an empty request:
+
+<code bash>
+ros2 service call /marty/connect std_srvs/srv/Trigger '{}'
+ros2 service call /marty/stop std_srvs/srv/Trigger '{}'
+ros2 service call /marty/disconnect std_srvs/srv/Trigger '{}'
+</code>
+
+Connect opens the configured endpoint and starts telemetry. Stop requests the firmware's clear-and-stop command; success confirms acknowledgement. Disconnect closes the connection and disables automatic reconnect. Stop interrupts an active motion goal, which reports ''ABORTED''.
+
+===== 3 - Movement action =====
+
+Actions provide feedback and a final result for operations that take time. Inspect the goal, result and feedback fields:
+
+<code bash>
+ros2 interface show marty_interfaces/action/Motion
+</code>
+
+With Marty connected and idle, try a small eyebrow movement (servo 8):
+
+<code bash>
+ros2 action send_goal /marty/motion marty_interfaces/action/Motion \
+  '{command: 4, joint_id: 8, position_degrees: 5, move_time_ms: 800}' --feedback
+</code>
+
+Place Marty on a clear, flat surface before walking or turning. One small forward step:
+
+<code bash>
+ros2 action send_goal /marty/motion marty_interfaces/action/Motion \
+  '{command: 0, num_steps: 1, side: auto, step_length_mm: 20, turn_degrees: 0, move_time_ms: 1500}' --feedback
+</code>
+
+A turning step uses ''step_length_mm: 0'' and a nonzero ''turn_degrees''.
+
+^ command ^ Operation ^ Main arguments ^
+| 0 | Walk / turn | ''num_steps'', ''side'', ''step_length_mm'', ''turn_degrees'', ''move_time_ms'' |
+| 1 | Dance | ''side: left'' or ''right'', ''move_time_ms'' |
+| 2 | Kick | ''side: left'' or ''right'', ''move_time_ms'' |
+| 3 | Stand | ''move_time_ms'' |
+| 4 | Move joint | ''joint_id'', ''position_degrees'', ''move_time_ms'' |
+
+Goals use SDK angles in degrees; joint topics use radians. Walking accepts 1–10 steps, −50–50 mm step length and −100–100° turn. Joint IDs are 0–8 and positions are −90–90°. Duration is 100–10000 ms; for walking it is per step.
+
+Only one goal is admitted at a time. Fresh, idle and unpaused robot status with an empty firmware queue is required. Completion waits for fresh idle status; acknowledgement alone does not finish the action. A connection loss aborts the goal, and commands are never replayed after reconnect.
+
+===== 4 - Configuration and additional robots =====
+
+A robot file can contain multiple entries with unique namespaces and connections:
+
+<code yaml>
+martys:
+  marty:
+    method: usb
+    locator: /dev/serial/by-id/REPLACE_WITH_MARTY_DEVICE
+    auto_connect: false
+    auto_reconnect: false
+  marty2:
+    method: wifi
+    locator: 192.168.1.9
+    auto_connect: false
+    auto_reconnect: false
+</code>
+
+Launch each driver in its own terminal:
+
+<code bash>
+ros2 launch marty_bringup bringup.launch.py namespace:=marty
+ros2 launch marty_bringup bringup.launch.py namespace:=marty2
+</code>
+
+The second robot's services and topics use ''/marty2/...''. A launch starts one driver, not every entry in the file. Configuration is read at startup; restart the driver after editing it.
+
+Explicit overrides take precedence:
+
+<code bash>
+ros2 launch marty_bringup bringup.launch.py namespace:=marty subscribe_rate_hz:=20.0
+ros2 launch marty_bringup bringup.launch.py --show-args
+</code>
+
+''MARTY_MACHINE_CONFIG'' selects another machine env file. ''robots_file:=/path/to/robots.yaml'' selects another robot file; ''params_file:=/path/to/parameters.yaml'' selects another ROS parameter YAML.
+
+See [[https://github.com/robotical/marty-ros2/blob/main/docs/interfaces.md|ROS interface reference]] for action semantics and joint mapping. The existing Marty model still needs a verified name/sign/zero-angle mapping before displaying measured joints in RViz.

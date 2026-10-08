@@ -9,6 +9,7 @@ setup(
         ('share/marty_bringup/config', ['config/marty.yaml']),
     ],
     install_requires=['setuptools'], zip_safe=True,
+    tests_require=['pytest'],
     maintainer='Robotical', maintainer_email='hello@robotical.io',
     description='Marty V2 ROS 2 bringup', license='Apache-2.0',
 )

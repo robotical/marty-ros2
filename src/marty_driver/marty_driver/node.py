@@ -19,6 +19,7 @@ from std_srvs.srv import Trigger
 from marty_interfaces.action import Motion as MotionAction
 from marty_interfaces.msg import DriverStatus, ServoState, ServoStates, Telemetry
 
+from .config import DEFAULT_PARAMETERS
 from .motion import Motion
 from .session import Session
 from .telemetry import battery_values, joint_mapping, json_values, servo_values
@@ -29,14 +30,7 @@ class MartyDriver(Node):
 
     def __init__(self, **kwargs):
         super().__init__('marty_driver', **kwargs)
-        defaults = {
-            'method': 'usb', 'locator': '', 'serial_baud': 115200, 'wifi_port': 80,
-            'subscribe_rate_hz': 10.0, 'auto_connect': False, 'auto_reconnect': True,
-            'stale_after_seconds': 2.0, 'reconnect_interval_seconds': 2.0,
-            'completion_margin_seconds': 5.0, 'joint_map': '{}',
-            'acceleration_scale': 9.80665, 'imu_frame': 'marty_accelerometer',
-            'battery_frame': 'marty_battery',
-        }
+        defaults = DEFAULT_PARAMETERS
         for name, value in defaults.items():
             self.declare_parameter(name, value, ParameterDescriptor(read_only=True))
         p = {name: self.get_parameter(name).value for name in defaults}

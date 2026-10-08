@@ -12,9 +12,11 @@ docker run --rm -v "$repo_root:/work:ro" -v "$repo_root/.validation:/results" \
     colcon build --base-paths /work/src
     source /ws/install/setup.bash
     test_status=0
-    colcon test --base-paths /work/src --packages-select marty_driver \
+    colcon test --base-paths /work/src --packages-select marty_driver marty_bringup \
       --event-handlers console_direct+ --return-code-on-test-failure || test_status=$?
     cp /ws/build/marty_driver/pytest.xml /results/
+    cp /ws/build/marty_bringup/pytest.xml /results/bringup-pytest.xml
+    python3 -m pytest /work/scripts/test -q || test_status=$?
     colcon test-result --verbose || test_status=$?
     test "$test_status" -eq 0
     ros2 launch marty_bringup bringup.launch.py --show-args

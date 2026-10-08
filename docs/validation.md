@@ -1,15 +1,17 @@
 # Validation record
 
-Validated on 1 October 2026. The software target is ROS Jazzy on Ubuntu 24.04,
-Python 3.12 and MartyPy 3.7.2. Linux ROS runs in Docker Desktop on the development
-Mac. Source mounts are read-only; builds happen inside disposable containers.
+The software target is ROS Jazzy on Ubuntu 24.04, Python 3.12 and MartyPy 3.7.2.
+Automated checks were repeated on 8 October 2026 in disposable Linux containers.
+Physical USB checks below were completed on 1 October 2026.
 
 ## Automated checks
 
-The final automated suite passed **28 tests, with zero errors, failures or skips**.
+The automated suite passed **38 ROS tests and four setup-script tests**, with
+zero errors, failures or skips.
 `./scripts/validate_ros.sh` builds all three packages, generates the actual ROS
-interfaces, runs the driver tests through `colcon`, checks their results and verifies
-installed launch arguments. Logs and JUnit XML are saved under `.validation/`.
+interfaces, runs driver and bringup tests through `colcon`, checks the setup script
+and verifies installed launch arguments. Validation runs locally; there is no
+GitHub Actions workflow. Logs and JUnit XML are saved under `.validation/`.
 
 The tests cover:
 
@@ -23,6 +25,18 @@ The tests cover:
 - Disappearance of telemetry without publication of stale cached measurements.
 - Worker boundary cases: stop before dispatch, a delayed acknowledgement, rejected
   acknowledgements, status-only loss, movement timeout and failed stop handling.
+- Local robot configuration types, namespaces and duplicate connections.
+- Installed launch precedence: parameter YAML, selected robot entry, then CLI.
+  Launch stays disconnected until an explicit connect service call, after which
+  accelerometer measurements reach a real ROS subscriber.
+- Machine setup from outside the checkout, paths containing spaces, relative paths,
+  Python environment activation and missing-file errors.
+
+The README build sequence was also run with a fresh Python 3.12 virtual environment:
+SDK/development-tool installation, rosdep resolution, symlink build, then sourcing
+`scripts/setup_env.sh` from another directory. The installed driver imported ROS
+and MartyPy using that virtual environment, and the launch argument check passed.
+No physical robot was connected or moved during this configuration validation.
 
 The RIC peer intentionally accepts the historical MartyPy WebSocket upgrade without
 `Sec-WebSocket-Key`, as the firmware does. A standards-strict WebSocket server cannot

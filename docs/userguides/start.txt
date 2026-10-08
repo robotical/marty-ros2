@@ -1,0 +1,33 @@
+---json
+{"name": "ROS 2"}
+---
+====== ROS 2 ======
+
+Connect Marty V2 to ROS 2 over USB or Wi-Fi. The standalone driver provides accelerometer, joint and battery topics, connection services and a movement action. Commands run from a Bash terminal on Linux.
+
+===== 1 - Start here =====
+
+  - [[:martyv2:ros2:getting_started|Install and connect]] — build on Linux, configure the machine and robot, then read acceleration.
+  - [[:martyv2:ros2:interfaces|Topics, services and movement]] — inspect the ROS graph and send movement commands.
+
+Source: [[https://github.com/robotical/marty-ros2|robotical/marty-ros2]]. Target: Ubuntu 24.04, ROS 2 Jazzy and Python 3.12.
+
+===== 2 - ROS graph =====
+
+{{https://raw.githubusercontent.com/robotical/marty-ros2/main/docs/ros-graphs/marty-overview.png?760&nolink|Marty ROS 2 node, topics, services and action}}
+
+''/marty/marty_driver'' owns one MartyPy connection. ROS subscribers receive measurement topics; service and action clients send requests to the driver. The firmware generates the movements.
+
+Each robot uses a separate namespace. There is no dependency on Axiom or a dashboard.
+
+===== 3 - Connection and telemetry =====
+
+The guide starts the driver disconnected. ''/marty/connect'' opens the configured connection and MartyPy starts telemetry at ''subscribe_rate_hz''. There is no separate acquisition service. A ''ros2 topic echo'' command subscribes to an existing ROS topic; stopping that echo does not stop the driver or firmware telemetry.
+
+''/marty/disconnect'' closes the connection and disables automatic reconnect. Measurement topics use best-effort QoS. ''/marty/status'' is reliable and transient-local.
+
+===== 4 - Current scope =====
+
+The IMU topic contains acceleration in m/s², including gravity; gyro and orientation are unavailable. Joint positions are in radians. Movement goals use firmware degrees and millimetres.
+
+The driver exposes walk, dance, kick, stand and single-joint movement. It does not yet include a calibrated RViz robot model, velocity control or odometry. [[https://github.com/robotical/marty-ros2/blob/main/docs/validation.md|Validation details]] distinguish automated checks from physical tests.

@@ -1,0 +1,26 @@
+digraph Marty {
+  graph [rankdir=LR, bgcolor="white", pad=0.25, nodesep=0.45, ranksep=0.7,
+         fontname="Helvetica", fontsize=13, dpi=160];
+  node [shape=box, style="rounded,filled", fillcolor="#f4f7f8", color="#9bafb5",
+        fontname="Helvetica", fontsize=12, margin="0.16,0.12"];
+  edge [fontname="Helvetica", fontsize=10, color="#61777e", arrowsize=0.7];
+  robot [label="Marty V2\nFirmware + sensors", fillcolor="#e7f2f2"];
+  driver [label="/marty/marty_driver\nMartyPy connection", fillcolor="#d9eded", penwidth=1.5];
+  topics [label="Measurement topics\n/marty/imu/data_raw\n/marty/joint_states\n/marty/servo_states\n/marty/battery\n/marty/telemetry"];
+  status [label="State topics\n/marty/status\n/marty/diagnostics"];
+  subscriber [label="ROS node\nor ros2 topic echo", fillcolor="#eef2fa"];
+  client [label="ROS node\nor ROS CLI", fillcolor="#eef2fa"];
+  services [label="Services (Trigger)\n/marty/connect\n/marty/disconnect\n/marty/stop"];
+  action [label="Action (Motion)\n/marty/motion\nGoal · feedback · result"];
+  robot -> driver [label="USB / Wi-Fi telemetry"];
+  driver -> robot [label="Connection / motion commands", constraint=false];
+  driver -> topics [label="publish · best effort"];
+  driver -> status [label="publish"];
+  topics -> subscriber [label="subscribe"];
+  status -> subscriber [label="subscribe"];
+  client -> services [label="request / response"];
+  client -> action [label="goal / feedback / result"];
+  services -> driver [label="serve", constraint=false];
+  action -> driver [label="execute", constraint=false];
+  {rank=same; topics; status; services; action}
+}

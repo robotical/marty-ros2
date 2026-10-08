@@ -1,0 +1,136 @@
+---json
+{"name": "Install and connect"}
+---
+====== Install and connect ======
+{{indexmenu_n>10}}
+
+Build the standalone Marty V2 driver and read its accelerometer. Use Ubuntu 24.04, ROS 2 Jazzy, Python 3.12 and Bash.
+
+===== 1 - Install and build =====
+
+Install ROS 2 Jazzy using the [[https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html|Ubuntu installation instructions]], then install the development tools:
+
+<code bash>
+sudo apt install ros-dev-tools python3-venv python3-pip
+sudo rosdep init  # Once per machine; skip if already initialized.
+rosdep update
+</code>
+
+Clone into any directory. All commands below run from the repository root:
+
+<code bash>
+git clone https://github.com/robotical/marty-ros2.git
+cd marty-ros2
+source /opt/ros/jazzy/setup.bash
+/usr/bin/python3 -m venv --system-site-packages .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt colcon-common-extensions
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --base-paths src --symlink-install
+</code>
+
+The virtual environment includes the system ROS packages and MartyPy. Building with the virtual environment active makes the installed driver use that Python environment.
+
+===== 2 - Machine configuration =====
+
+Create the local configuration files once. Both are ignored by Git:
+
+<code bash>
+cp -n config/machine.env.example config/machine.env
+cp -n config/robots.yaml.example config/robots.yaml
+</code>
+
+''config/machine.env'' contains:
+
+<code bash>
+ROS_SETUP_FILE=/opt/ros/jazzy/setup.bash
+ROS_DOMAIN_ID=0
+MARTY_PYTHON_VENV="$MARTY_ROS_ROOT/.venv"
+MARTY_ROS_ROBOTS_FILE="$MARTY_ROS_ROOT/config/robots.yaml"
+</code>
+
+''scripts/setup_env.sh'' determines ''MARTY_ROS_ROOT'' from its own location, loads this file, activates the Python environment and sources ROS and the built workspace. It starts no node and opens no device connection.
+
+The workspace defaults to the checkout. Set ''ROS_WORKSPACE'' if the project was built elsewhere, or change ''ROS_SETUP_FILE'' for another ROS installation path. Relative configuration paths are resolved from the checkout. Use the same ''ROS_DOMAIN_ID'' in every ROS terminal.
+
+===== 3 - Robot connection =====
+
+For **USB**, set ''config/robots.yaml'' to:
+
+<code yaml>
+martys:
+  marty:
+    method: usb
+    locator: /dev/serial/by-id/REPLACE_WITH_MARTY_DEVICE
+    auto_connect: false
+    auto_reconnect: false
+    subscribe_rate_hz: 10.0
+</code>
+
+Find the serial port with:
+
+<code bash>
+ls -l /dev/serial/by-id/
+</code>
+
+If serial access is denied, add the Linux user to ''dialout'', then log out and back in:
+
+<code bash>
+sudo usermod -aG dialout "$USER"
+</code>
+
+For **Wi-Fi**, replace only ''method'' and ''locator'' inside the same entry:
+
+<code yaml>
+    method: wifi
+    locator: 192.168.1.8
+</code>
+
+Use Marty's actual IP address or hostname, without ''http://'' or ''ws://''. Marty must already be connected to the network. [[:martyv2:userguides:marty:wifi|Wi-Fi setup]] and [[https://userguides.robotical.io/martyv2/support_faqs/connectivity/find_ip|Find IP address]] cover the robot's network settings.
+
+Packaged defaults are in ''src/marty_bringup/config/marty.yaml''. The selected ''robots.yaml'' entry overrides those values; explicit launch arguments override both. ''auto_connect: false'' keeps connection manual; ''auto_reconnect: false'' keeps reconnection manual.
+
+===== 4 - Start the driver =====
+
+In **Terminal 1**, from the repository root:
+
+<code bash>
+source scripts/setup_env.sh
+ros2 launch marty_bringup bringup.launch.py namespace:=marty
+</code>
+
+Keep this terminal running. The ''marty'' entry selects the connection and creates ''/marty/marty_driver''. No connection or movement starts yet.
+
+===== 5 - Connect and read acceleration =====
+
+In **Terminal 2**, from the repository root:
+
+<code bash>
+source scripts/setup_env.sh
+ros2 service call /marty/connect std_srvs/srv/Trigger '{}'
+ros2 topic echo /marty/imu/data_raw --field linear_acceleration --qos-reliability best_effort
+</code>
+
+The service should return ''success: true''. MartyPy starts telemetry on connection. The echo displays x, y and z in m/s², including gravity. Move Marty gently to see the values change.
+
+Stop the echo with Ctrl+C. Check connection state and the running graph:
+
+<code bash>
+ros2 topic echo /marty/status --once --qos-durability transient_local
+ros2 node info /marty/marty_driver
+ros2 topic list -t
+</code>
+
+If no readings appear, check ''connected'', ''telemetry_fresh'' and ''last_error'' on the status topic. The driver must be running, the connection must be reachable, and measurement subscribers must use best-effort QoS.
+
+===== 6 - Disconnect =====
+
+In Terminal 2:
+
+<code bash>
+ros2 service call /marty/disconnect std_srvs/srv/Trigger '{}'
+</code>
+
+Then Ctrl+C in Terminal 1 stops the driver.
+
+Next: [[:martyv2:ros2:interfaces|Topics, services and movement]].
