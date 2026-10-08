@@ -86,7 +86,7 @@ For **Wi-Fi**, replace only ''method'' and ''locator'' inside the same entry:
     locator: 192.168.1.8
 </code>
 
-Use Marty's actual IP address or hostname, without ''http://'' or ''ws://''. Marty must already be connected to the network. [[:martyv2:userguides:marty:wifi|Wi-Fi setup]] and [[https://userguides.robotical.io/martyv2/support_faqs/connectivity/find_ip|Find IP address]] cover the robot's network settings.
+Set ''locator'' to Marty's actual IP address or hostname. Marty must already be connected to the network. [[:martyv2:userguides:marty:wifi|Wi-Fi setup]] and [[https://userguides.robotical.io/martyv2/support_faqs/connectivity/find_ip|Find IP address]] cover the robot's network settings.
 
 Packaged defaults are in ''src/marty_bringup/config/marty.yaml''. The selected ''robots.yaml'' entry overrides those values; explicit launch arguments override both. ''auto_connect: false'' keeps connection manual; ''auto_reconnect: false'' keeps reconnection manual.
 
