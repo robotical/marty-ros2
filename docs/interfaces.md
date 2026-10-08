@@ -102,4 +102,3 @@ telemetry only, not firmware action coordinates. To use `marty2_description` lat
 calibrate all independent joints, remap its `robot_state_publisher` joint-state input
 to `/marty/joint_states`, and avoid running its mock joint-state broadcaster on the
 same input. This milestone does not declare that model mapping validated.
-
