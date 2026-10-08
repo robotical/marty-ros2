@@ -32,11 +32,13 @@ The tests cover:
 - Machine setup from outside the checkout, paths containing spaces, relative paths,
   Python environment activation and missing-file errors.
 
-The README build sequence was also run with a fresh Python 3.12 virtual environment:
-SDK/development-tool installation, rosdep resolution, symlink build, then sourcing
-`scripts/setup_env.sh` from another directory. The installed driver imported ROS
-and MartyPy using that virtual environment, and the launch argument check passed.
-No physical robot was connected or moved during this configuration validation.
+The build was checked with a fresh Python 3.12 virtual environment and MartyPy
+available only inside that environment. Bare `colcon build` reproduced the import
+failure: system colcon generated a driver executable using `/usr/bin/python3`.
+Running `python "$(command -v colcon)" build` regenerated it with the venv's Python.
+The installed launch test then passed explicit connection and accelerometer delivery
+through ROS, with no global MartyPy installation. No physical robot was connected
+or moved during this configuration validation.
 
 The RIC peer intentionally accepts the historical MartyPy WebSocket upgrade without
 `Sec-WebSocket-Key`, as the firmware does. A standards-strict WebSocket server cannot

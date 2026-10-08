@@ -24,11 +24,13 @@ source /opt/ros/jazzy/setup.bash
 source .venv/bin/activate
 python -m pip install -r requirements.txt colcon-common-extensions
 rosdep install --from-paths src --ignore-src -r -y
-colcon build --base-paths src --symlink-install
+python "$(command -v colcon)" build --base-paths src --symlink-install
 ```
 
 The virtual environment includes the ROS installation's Python packages and
-MartyPy. Building with its Python ensures the driver can import both.
+MartyPy. Run `colcon` explicitly through the active Python as shown above: a system
+`colcon` executable otherwise builds the driver with system Python, even while the
+venv is active. The generated driver executable keeps that build-time interpreter.
 
 ## 2. Configure the machine and Marty
 

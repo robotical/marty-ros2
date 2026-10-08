@@ -26,10 +26,10 @@ source /opt/ros/jazzy/setup.bash
 source .venv/bin/activate
 python -m pip install -r requirements.txt colcon-common-extensions
 rosdep install --from-paths src --ignore-src -r -y
-colcon build --base-paths src --symlink-install
+python "$(command -v colcon)" build --base-paths src --symlink-install
 </code>
 
-The virtual environment includes the system ROS packages and MartyPy. Building with the virtual environment active makes the installed driver use that Python environment.
+The virtual environment includes the system ROS packages and MartyPy. Run ''colcon'' explicitly through the active Python as shown above. A system ''colcon'' executable otherwise builds the driver with system Python, even while the venv is active. The generated driver executable keeps that build-time interpreter.
 
 ===== Machine configuration =====
 
