@@ -6,7 +6,7 @@
 
 Start with [[:martyv2:ros2:getting_started|Install and connect]]. Run commands in a terminal prepared with ''source scripts/setup_env.sh''.
 
-===== 1 - Inspect the ROS graph =====
+===== Inspect the ROS graph =====
 
 <code bash>
 ros2 node list
@@ -35,7 +35,7 @@ ros2 topic echo /marty/battery --qos-reliability best_effort
 ros2 interface show marty_interfaces/msg/DriverStatus
 </code>
 
-===== 2 - Services =====
+===== Services =====
 
 All three services use ''std_srvs/srv/Trigger'' with an empty request:
 
@@ -47,7 +47,7 @@ ros2 service call /marty/disconnect std_srvs/srv/Trigger '{}'
 
 Connect opens the configured endpoint and starts telemetry. Stop requests the firmware's clear-and-stop command; success confirms acknowledgement. Disconnect closes the connection and disables automatic reconnect. Stop interrupts an active motion goal, which reports ''ABORTED''.
 
-===== 3 - Movement action =====
+===== Movement action =====
 
 Actions provide feedback and a final result for operations that take time. Inspect the goal, result and feedback fields:
 
@@ -82,7 +82,7 @@ Goals use SDK angles in degrees; joint topics use radians. Walking accepts 1–1
 
 Only one goal is admitted at a time. Fresh, idle and unpaused robot status with an empty firmware queue is required. Completion waits for fresh idle status; acknowledgement alone does not finish the action. A connection loss aborts the goal, and commands are never replayed after reconnect.
 
-===== 4 - Configuration and additional robots =====
+===== Configuration and additional robots =====
 
 A robot file can contain multiple entries with unique namespaces and connections:
 

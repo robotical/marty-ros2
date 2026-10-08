@@ -1,26 +1,21 @@
 digraph Marty {
-  graph [rankdir=LR, bgcolor="white", pad=0.25, nodesep=0.45, ranksep=0.7,
-         fontname="Helvetica", fontsize=13, dpi=160];
+  graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.55, ranksep=0.55,
+         fontname="Helvetica", fontsize=14, dpi=160];
   node [shape=box, style="rounded,filled", fillcolor="#f4f7f8", color="#9bafb5",
-        fontname="Helvetica", fontsize=12, margin="0.16,0.12"];
-  edge [fontname="Helvetica", fontsize=10, color="#61777e", arrowsize=0.7];
+        fontname="Helvetica", fontsize=14, margin="0.18,0.14"];
+  edge [fontname="Helvetica", fontsize=12, color="#61777e", arrowsize=0.75];
   robot [label="Marty V2\nFirmware + sensors", fillcolor="#e7f2f2"];
+  client [label="ROS node / ROS CLI\nService + action client", fillcolor="#eef2fa"];
   driver [label="/marty/marty_driver\nMartyPy connection", fillcolor="#d9eded", penwidth=1.5];
-  topics [label="Measurement topics\n/marty/imu/data_raw\n/marty/joint_states\n/marty/servo_states\n/marty/battery\n/marty/telemetry"];
-  status [label="State topics\n/marty/status\n/marty/diagnostics"];
-  subscriber [label="ROS node\nor ros2 topic echo", fillcolor="#eef2fa"];
-  client [label="ROS node\nor ROS CLI", fillcolor="#eef2fa"];
-  services [label="Services (Trigger)\n/marty/connect\n/marty/disconnect\n/marty/stop"];
-  action [label="Action (Motion)\n/marty/motion\nGoal · feedback · result"];
-  robot -> driver [label="USB / Wi-Fi telemetry"];
-  driver -> robot [label="Connection / motion commands", constraint=false];
-  driver -> topics [label="publish · best effort"];
+  topics [label="Measurement topics · best effort\n/marty/imu/data_raw\n/marty/joint_states\n/marty/servo_states\n/marty/battery\n/marty/telemetry"];
+  status [label="State topics · reliable\n/marty/status (transient-local)\n/marty/diagnostics"];
+  subscriber [label="ROS node / ros2 topic echo\nTopic subscriber", fillcolor="#eef2fa"];
+  {rank=same; robot; client}
+  {rank=same; topics; status}
+  robot -> driver [label="USB / Wi-Fi\nTelemetry + commands", dir=both];
+  client -> driver [label="Services · std_srvs/srv/Trigger\n/marty/connect · /marty/disconnect · /marty/stop\n\nAction · marty_interfaces/action/Motion\n/marty/motion · goal, feedback, result", dir=both];
+  driver -> topics [label="publish"];
   driver -> status [label="publish"];
   topics -> subscriber [label="subscribe"];
   status -> subscriber [label="subscribe"];
-  client -> services [label="request / response"];
-  client -> action [label="goal / feedback / result"];
-  services -> driver [label="serve", constraint=false];
-  action -> driver [label="execute", constraint=false];
-  {rank=same; topics; status; services; action}
 }

@@ -6,7 +6,7 @@
 
 Build the standalone Marty V2 driver and read its accelerometer. Use Ubuntu 24.04, ROS 2 Jazzy, Python 3.12 and Bash.
 
-===== 1 - Install and build =====
+===== Install and build =====
 
 Install ROS 2 Jazzy using the [[https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html|Ubuntu installation instructions]], then install the development tools:
 
@@ -31,7 +31,7 @@ colcon build --base-paths src --symlink-install
 
 The virtual environment includes the system ROS packages and MartyPy. Building with the virtual environment active makes the installed driver use that Python environment.
 
-===== 2 - Machine configuration =====
+===== Machine configuration =====
 
 Create the local configuration files once. Both are ignored by Git:
 
@@ -53,7 +53,7 @@ MARTY_ROS_ROBOTS_FILE="$MARTY_ROS_ROOT/config/robots.yaml"
 
 The workspace defaults to the checkout. Set ''ROS_WORKSPACE'' if the project was built elsewhere, or change ''ROS_SETUP_FILE'' for another ROS installation path. Relative configuration paths are resolved from the checkout. Use the same ''ROS_DOMAIN_ID'' in every ROS terminal.
 
-===== 3 - Robot connection =====
+===== Robot connection =====
 
 For **USB**, set ''config/robots.yaml'' to:
 
@@ -90,7 +90,7 @@ Set ''locator'' to Marty's actual IP address or hostname. Marty must already be 
 
 Packaged defaults are in ''src/marty_bringup/config/marty.yaml''. The selected ''robots.yaml'' entry overrides those values; explicit launch arguments override both. ''auto_connect: false'' keeps connection manual; ''auto_reconnect: false'' keeps reconnection manual.
 
-===== 4 - Start the driver =====
+===== Start the driver =====
 
 In **Terminal 1**, from the repository root:
 
@@ -101,7 +101,7 @@ ros2 launch marty_bringup bringup.launch.py namespace:=marty
 
 Keep this terminal running. The ''marty'' entry selects the connection and creates ''/marty/marty_driver''. No connection or movement starts yet.
 
-===== 5 - Connect and read acceleration =====
+===== Connect and read acceleration =====
 
 In **Terminal 2**, from the repository root:
 
@@ -123,7 +123,7 @@ ros2 topic list -t
 
 If no readings appear, check ''connected'', ''telemetry_fresh'' and ''last_error'' on the status topic. The driver must be running, the connection must be reachable, and measurement subscribers must use best-effort QoS.
 
-===== 6 - Disconnect =====
+===== Disconnect =====
 
 In Terminal 2:
 
