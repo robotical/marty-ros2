@@ -119,3 +119,5 @@ ros2 launch marty_bringup bringup.launch.py --show-args
 ''MARTY_MACHINE_CONFIG'' selects another machine env file. ''robots_file:=/path/to/robots.yaml'' selects another robot file; ''params_file:=/path/to/parameters.yaml'' selects another ROS parameter YAML.
 
 See [[https://github.com/robotical/marty-ros2/blob/main/docs/interfaces.md|ROS interface reference]] for action semantics and joint mapping. The existing Marty model still needs a verified name/sign/zero-angle mapping before displaying measured joints in RViz.
+
+[[:martyv2:ros2:simulation|RViz simulation]] provides a separate setup for controlling simulated joints without a physical connection.

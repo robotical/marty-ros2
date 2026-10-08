@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>marty_simulation</name>
+  <version>0.1.0</version>
+  <description>Standalone Marty MuJoCo simulation and RViz visualization.</description>
+  <maintainer email="hello@robotical.io">Robotical</maintainer>
+  <license>Apache-2.0</license>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>marty2_description</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+  <test_depend>tf2_msgs</test_depend>
+  <!-- MuJoCo is installed with requirements-simulation.txt in the ROS venv. -->
+  <export><build_type>ament_python</build_type></export>
+</package>

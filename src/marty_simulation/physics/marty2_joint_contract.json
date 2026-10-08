@@ -1,0 +1,1026 @@
+{
+  "source": "public/vendor/marty2_description/urdf/marty2/marty2.urdf",
+  "kinematics": "public/physics/marty2_kinematics.json",
+  "mjcf": "public/physics/marty2_full.xml",
+  "stats": {
+    "movingJoints": 20,
+    "commandedJoints": 9,
+    "mimicJoints": 11
+  },
+  "movingJoints": [
+    {
+      "name": "eye_left_joint",
+      "parent": "head",
+      "child": "eye_left",
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "range": [
+        -3.0,
+        0.25
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "eye_left_act"
+    },
+    {
+      "name": "eye_right_joint",
+      "parent": "head",
+      "child": "eye_right",
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "range": [
+        -0.25,
+        3.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "eye_left_joint",
+        "multiplier": -1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "arm_servo_gear_left_joint",
+      "parent": "side_panel_left",
+      "child": "arm_servo_gear_left",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -0.95,
+        2.05
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "arm_servo_gear_left_act"
+    },
+    {
+      "name": "arm_left_joint",
+      "parent": "side_panel_left",
+      "child": "arm_left",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -2.68,
+        1.24
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "arm_servo_gear_left_joint",
+        "multiplier": -1.307692308,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "arm_servo_gear_right_joint",
+      "parent": "side_panel_right",
+      "child": "arm_servo_gear_right",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -0.95,
+        2.05
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "arm_servo_gear_right_act"
+    },
+    {
+      "name": "arm_right_joint",
+      "parent": "side_panel_right",
+      "child": "arm_right",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -2.68,
+        1.24
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "arm_servo_gear_right_joint",
+        "multiplier": -1.307692308,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "leg_left_thigh_joint",
+      "parent": "hip_left",
+      "child": "leg_left_thigh_front",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -1.0,
+        1.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "leg_left_thigh_act"
+    },
+    {
+      "name": "leg_left_thigh_back_joint",
+      "parent": "hip_left",
+      "child": "leg_left_thigh_back",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -1.0,
+        1.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "leg_left_thigh_joint",
+        "multiplier": 1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "leg_left_knee_upper_joint",
+      "parent": "leg_left_thigh_front",
+      "child": "leg_left_knee_upper",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -1.0,
+        1.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "leg_left_thigh_joint",
+        "multiplier": -1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "leg_left_twist_joint",
+      "parent": "leg_left_twist_upper",
+      "child": "leg_left_twist_lower",
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "range": [
+        -1.0,
+        1.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "leg_left_twist_act"
+    },
+    {
+      "name": "leg_left_shin_joint",
+      "parent": "leg_left_knee_lower",
+      "child": "leg_left_shin_exterior",
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "range": [
+        -1.5707963267948966,
+        1.5707963267948966
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "leg_left_shin_act"
+    },
+    {
+      "name": "leg_left_shin_interior_joint",
+      "parent": "leg_left_knee_lower",
+      "child": "leg_left_shin_interior",
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "range": [
+        -1.5707963267948966,
+        1.5707963267948966
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "leg_left_shin_joint",
+        "multiplier": 1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "foot_left_joint",
+      "parent": "leg_left_shin_exterior",
+      "child": "foot_left",
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "range": [
+        -1.5707963267948966,
+        1.5707963267948966
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "leg_left_shin_joint",
+        "multiplier": -1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "leg_right_thigh_joint",
+      "parent": "hip_right",
+      "child": "leg_right_thigh_front",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -1.0,
+        1.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "leg_right_thigh_act"
+    },
+    {
+      "name": "leg_right_thigh_back_joint",
+      "parent": "hip_right",
+      "child": "leg_right_thigh_back",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -1.0,
+        1.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "leg_right_thigh_joint",
+        "multiplier": 1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "leg_right_knee_upper_joint",
+      "parent": "leg_right_thigh_front",
+      "child": "leg_right_knee_upper",
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "range": [
+        -1.0,
+        1.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "leg_right_thigh_joint",
+        "multiplier": -1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "leg_right_twist_joint",
+      "parent": "leg_right_twist_upper",
+      "child": "leg_right_twist_lower",
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "range": [
+        -1.0,
+        1.0
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "leg_right_twist_act"
+    },
+    {
+      "name": "leg_right_shin_exterior_joint",
+      "parent": "leg_right_knee_lower",
+      "child": "leg_right_shin_exterior",
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "range": [
+        -1.5707963267948966,
+        1.5707963267948966
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "leg_right_shin_joint",
+        "multiplier": 1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    },
+    {
+      "name": "leg_right_shin_joint",
+      "parent": "leg_right_knee_lower",
+      "child": "leg_right_shin_interior",
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "range": [
+        -1.5707963267948966,
+        1.5707963267948966
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": null,
+      "commanded": true,
+      "actuator": "leg_right_shin_act"
+    },
+    {
+      "name": "foot_right_joint",
+      "parent": "leg_right_shin_interior",
+      "child": "foot_right",
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "range": [
+        -1.5707963267948966,
+        1.5707963267948966
+      ],
+      "effort": 30.0,
+      "velocity": 6.29,
+      "mimic": {
+        "joint": "leg_right_shin_joint",
+        "multiplier": -1.0,
+        "offset": 0.0
+      },
+      "commanded": false,
+      "actuator": null
+    }
+  ],
+  "rootSpawn": {
+    "source": "calculated_from_generated_foot_collision_site_geometry",
+    "calculation": "baseHeight = -min(neutral foot height-site world z when root body height is zero)",
+    "baseHeight": 0.15337999986999998,
+    "rootLinks": [
+      "base_link"
+    ],
+    "feet": {
+      "left": {
+        "link": "foot_left",
+        "heightSite": "left_foot_site",
+        "siteLocalPosition": [
+          0.018950023688500003,
+          -0.004350000061,
+          -0.00829999987
+        ],
+        "sitePositionAtRootHeightZero": [
+          0.0028700236885000063,
+          0.032089999939,
+          -0.15337999986999998
+        ],
+        "rootHeightToPlaceSiteOnFloor": 0.15337999986999998,
+        "siteZAtSpawn": 0.0
+      },
+      "right": {
+        "link": "foot_right",
+        "heightSite": "right_foot_site",
+        "siteLocalPosition": [
+          0.018949944354999998,
+          -0.0118501391535,
+          -0.00829999987
+        ],
+        "sitePositionAtRootHeightZero": [
+          0.002869944355000001,
+          -0.031910139153499995,
+          -0.15337999986999998
+        ],
+        "rootHeightToPlaceSiteOnFloor": 0.15337999986999998,
+        "siteZAtSpawn": 0.0
+      }
+    }
+  },
+  "keyframes": [
+    {
+      "name": "neutral",
+      "source": "Neutral pose: all URDF-commandable joint targets at 0.",
+      "commandedJointPositions": {
+        "eye_left_joint": 0,
+        "arm_servo_gear_left_joint": 0,
+        "arm_servo_gear_right_joint": 0,
+        "leg_left_thigh_joint": 0,
+        "leg_right_thigh_joint": 0,
+        "leg_left_twist_joint": 0,
+        "leg_right_twist_joint": 0,
+        "leg_left_shin_joint": 0,
+        "leg_right_shin_joint": 0
+      }
+    },
+    {
+      "name": "stand_straight",
+      "source": "RIC2FirmwareIDF/spiffs_image/standStraight.trj sets all commandable servos to 0.",
+      "commandedJointPositions": {
+        "eye_left_joint": 0,
+        "arm_servo_gear_left_joint": 0,
+        "arm_servo_gear_right_joint": 0,
+        "leg_left_thigh_joint": 0,
+        "leg_right_thigh_joint": 0,
+        "leg_left_twist_joint": 0,
+        "leg_right_twist_joint": 0,
+        "leg_left_shin_joint": 0,
+        "leg_right_shin_joint": 0
+      }
+    },
+    {
+      "name": "get_ready",
+      "source": "RIC2FirmwareIDF/spiffs_image/getReady.trj ends by setting all commandable servos to 0.",
+      "commandedJointPositions": {
+        "eye_left_joint": 0,
+        "arm_servo_gear_left_joint": 0,
+        "arm_servo_gear_right_joint": 0,
+        "leg_left_thigh_joint": 0,
+        "leg_right_thigh_joint": 0,
+        "leg_left_twist_joint": 0,
+        "leg_right_twist_joint": 0,
+        "leg_left_shin_joint": 0,
+        "leg_right_shin_joint": 0
+      }
+    },
+    {
+      "name": "get_ready_eyes_out",
+      "source": "RIC2FirmwareIDF/spiffs_image/getReady.trj wiggleOut = 30 degrees.",
+      "commandedJointPositions": {
+        "eye_left_joint": -0.5235987755982988,
+        "arm_servo_gear_left_joint": 0,
+        "arm_servo_gear_right_joint": 0,
+        "leg_left_thigh_joint": 0,
+        "leg_right_thigh_joint": 0,
+        "leg_left_twist_joint": 0,
+        "leg_right_twist_joint": 0,
+        "leg_left_shin_joint": 0,
+        "leg_right_shin_joint": 0
+      }
+    },
+    {
+      "name": "get_ready_eyes_in",
+      "source": "RIC2FirmwareIDF/spiffs_image/getReady.trj wiggleIn = -15 degrees.",
+      "commandedJointPositions": {
+        "eye_left_joint": 0.2617993877991494,
+        "arm_servo_gear_left_joint": 0,
+        "arm_servo_gear_right_joint": 0,
+        "leg_left_thigh_joint": 0,
+        "leg_right_thigh_joint": 0,
+        "leg_left_twist_joint": 0,
+        "leg_right_twist_joint": 0,
+        "leg_left_shin_joint": 0,
+        "leg_right_shin_joint": 0
+      }
+    }
+  ],
+  "sensors": {
+    "base": {
+      "position": "base_link_position",
+      "orientation": "base_link_orientation"
+    },
+    "feet": {
+      "left": {
+        "heightSite": "left_foot_site",
+        "contactSite": "left_foot_contact_site",
+        "position": "left_foot_position",
+        "contactForce": "left_foot_contact_force"
+      },
+      "right": {
+        "heightSite": "right_foot_site",
+        "contactSite": "right_foot_contact_site",
+        "position": "right_foot_position",
+        "contactForce": "right_foot_contact_force"
+      }
+    },
+    "commandedJoints": [
+      {
+        "joint": "eye_left_joint",
+        "position": "eye_left_pos",
+        "velocity": "eye_left_vel"
+      },
+      {
+        "joint": "arm_servo_gear_left_joint",
+        "position": "arm_servo_gear_left_pos",
+        "velocity": "arm_servo_gear_left_vel"
+      },
+      {
+        "joint": "arm_servo_gear_right_joint",
+        "position": "arm_servo_gear_right_pos",
+        "velocity": "arm_servo_gear_right_vel"
+      },
+      {
+        "joint": "leg_left_thigh_joint",
+        "position": "leg_left_thigh_pos",
+        "velocity": "leg_left_thigh_vel"
+      },
+      {
+        "joint": "leg_right_thigh_joint",
+        "position": "leg_right_thigh_pos",
+        "velocity": "leg_right_thigh_vel"
+      },
+      {
+        "joint": "leg_left_twist_joint",
+        "position": "leg_left_twist_pos",
+        "velocity": "leg_left_twist_vel"
+      },
+      {
+        "joint": "leg_right_twist_joint",
+        "position": "leg_right_twist_pos",
+        "velocity": "leg_right_twist_vel"
+      },
+      {
+        "joint": "leg_left_shin_joint",
+        "position": "leg_left_shin_pos",
+        "velocity": "leg_left_shin_vel"
+      },
+      {
+        "joint": "leg_right_shin_joint",
+        "position": "leg_right_shin_pos",
+        "velocity": "leg_right_shin_vel"
+      }
+    ]
+  },
+  "actuatorLimits": {
+    "source": "public/physics/marty2_servo_supplier_envelopes.json",
+    "status": "source_backed",
+    "mappingStatus": "confirmed",
+    "notes": [
+      "URDF effort and velocity values are retained in movingJoints for traceability but are not emitted as actuator limits because the current URDF uses placeholder effort=30 and velocity=6.29 values.",
+      "Source-backed force limits are emitted to MJCF position actuators as forcerange per actuator only when that actuator has a mapped supplier variant and limitSelection explicitly names a supplier voltage row, torque field, and velocity field.",
+      "Batch 12 production mapping now resolves current commandable actuator variants: hip/knee use FT1190M, twist uses FT90M, and arm/eye use FS90MG.",
+      "MuJoCo position actuator XML has no supported velocity limit attribute, so velocityLimitRadPerSec is exposed here for the controller rather than written into the MJCF.",
+      "Firmware kp/ki/kd remain controller references and are not direct MuJoCo kp/kv/damping values."
+    ],
+    "selection": {
+      "operatingVoltageV": 5.0,
+      "supplierVoltagePointUsedV": 4.8,
+      "torqueField": "ratedTorqueNm",
+      "velocityField": "noLoadAngularVelocityRadPerSec",
+      "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+      "sourceRefs": [
+        "mjcf_actuator_limit_selection_findings",
+        "servos_docx",
+        "ric_6_1_0_pdf",
+        "ft90m_spec_pdf",
+        "ft1190m_spec_pdf",
+        "fs90mg_spec_pdf"
+      ],
+      "caveats": [
+        "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+        "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+        "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+      ]
+    },
+    "selectionReady": true,
+    "commandedJoints": [
+      {
+        "joint": "eye_left_joint",
+        "actuator": "eye_left_act",
+        "servoName": "Eyes",
+        "servoGroup": "eye",
+        "partName": "Feetech Eye Servo",
+        "partNumber": "MV2-002-0249",
+        "productionDescription": "FS90MG (70mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_fs90mg_c001",
+        "mappedVariantModel": "FS90MG-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.0588399,
+        "velocityLimitRadPerSec": 12.042771838779,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      },
+      {
+        "joint": "arm_servo_gear_left_joint",
+        "actuator": "arm_servo_gear_left_act",
+        "servoName": "LeftArm",
+        "servoGroup": "arm",
+        "partName": "Feetech Arm Servo",
+        "partNumber": "MV2-002-0247",
+        "productionDescription": "FS90MG (55mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_fs90mg_c001",
+        "mappedVariantModel": "FS90MG-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.0588399,
+        "velocityLimitRadPerSec": 12.042771838779,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      },
+      {
+        "joint": "arm_servo_gear_right_joint",
+        "actuator": "arm_servo_gear_right_act",
+        "servoName": "RightArm",
+        "servoGroup": "arm",
+        "partName": "Feetech Arm Servo",
+        "partNumber": "MV2-002-0247",
+        "productionDescription": "FS90MG (55mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_fs90mg_c001",
+        "mappedVariantModel": "FS90MG-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.0588399,
+        "velocityLimitRadPerSec": 12.042771838779,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      },
+      {
+        "joint": "leg_left_thigh_joint",
+        "actuator": "leg_left_thigh_act",
+        "servoName": "RightHip",
+        "servoGroup": "hip",
+        "partName": "Feetech Hip Servo",
+        "partNumber": "MV2-002-0241",
+        "productionDescription": "FT1190M (55mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_ft1190m_c001",
+        "mappedVariantModel": "FT1190M-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.08825985,
+        "velocityLimitRadPerSec": 8.377580409573,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      },
+      {
+        "joint": "leg_right_thigh_joint",
+        "actuator": "leg_right_thigh_act",
+        "servoName": "LeftHip",
+        "servoGroup": "hip",
+        "partName": "Feetech Hip Servo",
+        "partNumber": "MV2-002-0241",
+        "productionDescription": "FT1190M (55mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_ft1190m_c001",
+        "mappedVariantModel": "FT1190M-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.08825985,
+        "velocityLimitRadPerSec": 8.377580409573,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      },
+      {
+        "joint": "leg_left_twist_joint",
+        "actuator": "leg_left_twist_act",
+        "servoName": "RightTwist",
+        "servoGroup": "twist",
+        "partName": "Feetech Twist Servo",
+        "partNumber": "MV2-002-0242",
+        "productionDescription": "FT90M (155mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_ft90m_c001",
+        "mappedVariantModel": "FT90M-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.0588399,
+        "velocityLimitRadPerSec": 8.377580409573,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      },
+      {
+        "joint": "leg_right_twist_joint",
+        "actuator": "leg_right_twist_act",
+        "servoName": "LeftTwist",
+        "servoGroup": "twist",
+        "partName": "Feetech Twist Servo",
+        "partNumber": "MV2-002-0242",
+        "productionDescription": "FT90M (155mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_ft90m_c001",
+        "mappedVariantModel": "FT90M-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.0588399,
+        "velocityLimitRadPerSec": 8.377580409573,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      },
+      {
+        "joint": "leg_left_shin_joint",
+        "actuator": "leg_left_shin_act",
+        "servoName": "RightKnee",
+        "servoGroup": "knee",
+        "partName": "Feetech Knee Servo",
+        "partNumber": "MV2-002-0243",
+        "productionDescription": "FT1190M (130mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_ft1190m_c001",
+        "mappedVariantModel": "FT1190M-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.08825985,
+        "velocityLimitRadPerSec": 8.377580409573,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      },
+      {
+        "joint": "leg_right_shin_joint",
+        "actuator": "leg_right_shin_act",
+        "servoName": "LeftKnee",
+        "servoGroup": "knee",
+        "partName": "Feetech Knee Servo",
+        "partNumber": "MV2-002-0243",
+        "productionDescription": "FT1190M (130mm cable)",
+        "supplier": "Shenzhen FEETECH RC Model CO.,Ltd.",
+        "mappedVariantId": "feetech_ft1190m_c001",
+        "mappedVariantModel": "FT1190M-C001",
+        "mappingResolved": true,
+        "forceLimitNm": 0.08825985,
+        "velocityLimitRadPerSec": 8.377580409573,
+        "selection": {
+          "operatingVoltageV": 5.0,
+          "supplierVoltagePointUsedV": 4.8,
+          "torqueField": "ratedTorqueNm",
+          "velocityField": "noLoadAngularVelocityRadPerSec",
+          "selectionPolicy": "nearest-lower-supplier-voltage-row-no-interpolation",
+          "sourceRefs": [
+            "mjcf_actuator_limit_selection_findings",
+            "servos_docx",
+            "ric_6_1_0_pdf",
+            "ft90m_spec_pdf",
+            "ft1190m_spec_pdf",
+            "fs90mg_spec_pdf"
+          ],
+          "caveats": [
+            "Marty-side operating voltage is source-backed as 5.0 V, but the checked FT90M/FT1190M supplier specs provide 4.8 V and 6.0 V rows, not an exact 5.0 V row.",
+            "ratedTorqueNm is a modelling choice for continuous MJCF forcerange based on the meaning of the supplier field; stallTorqueNm is retained as metadata for later stall/current protection modelling.",
+            "noLoadAngularVelocityRadPerSec is a source-backed no-load cap, not calibrated loaded response timing."
+          ]
+        },
+        "unresolvedReason": null,
+        "appliedToMjcf": {
+          "force": true,
+          "velocity": false,
+          "velocityReason": "MuJoCo position actuators support forcerange but no velocity XML attribute; velocity limits are retained here for controller code."
+        }
+      }
+    ]
+  }
+}

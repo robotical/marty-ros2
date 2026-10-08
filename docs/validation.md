@@ -6,10 +6,10 @@ Physical USB checks below were completed on 1 October 2026.
 
 ## Automated checks
 
-The automated suite passed **38 ROS tests and four setup-script tests**, with
+The automated suite passed **50 ROS tests and four setup-script tests**, with
 zero errors, failures or skips.
-`./scripts/validate_ros.sh` builds all three packages, generates the actual ROS
-interfaces, runs driver and bringup tests through `colcon`, checks the setup script
+`./scripts/validate_ros.sh` builds all five packages, generates the actual ROS
+interfaces, runs driver, bringup and simulation tests through `colcon`, checks the setup script
 and verifies installed launch arguments. Validation runs locally; there is no
 GitHub Actions workflow. Logs and JUnit XML are saved under `.validation/`.
 
@@ -31,6 +31,17 @@ The tests cover:
   accelerometer measurements reach a real ROS subscriber.
 - Machine setup from outside the checkout, paths containing spaces, relative paths,
   Python environment activation and missing-file errors.
+- Simulation asset loading, all nine independent joints and eleven URDF mimics,
+  ten seconds of native MuJoCo eye/arm motion, stable assisted base height,
+  invalid command rejection and unassisted mode without added damping/forces.
+- An installed simulation launch with an actual ROS joint command, simulated
+  feedback, mirrored-eye TF and floating-base TF. Its isolated graph contains
+  the simulation and robot-state publisher without a hardware driver.
+
+RViz was also opened in the local Linux desktop. Its status was OK and the model
+rendered all meshes. Moving the eye and left-arm sliders changed the ROS feedback
+and the rendered model; all nine joint controls were visible. MuJoCo 3.10.0 was
+checked on Linux ARM64. These checks do not establish physical gait accuracy.
 
 The build was checked with a fresh Python 3.12 virtual environment and MartyPy
 available only inside that environment. Bare `colcon build` reproduced the import

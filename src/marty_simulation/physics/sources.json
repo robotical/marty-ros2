@@ -1,0 +1,25 @@
+{
+  "repository": "marty-urdf-simulator",
+  "revision": "64461b169633c59401414718afc712ac84f7f12f",
+  "files": {
+    "public/vendor/marty2_description/urdf/marty2/marty2.urdf": "10a99d523cfa92589a99e54bb7164636af2f09971f95cdb5fbc4037e66a7e479",
+    "public/physics/marty2_full.xml": "3f0d08751d93600c5ae011156262cc2dbe95392e0cb7c0970718639efa7447f9",
+    "public/physics/marty2_joint_contract.json": "5e668950a4e649a1e3a8a5a22acf310db7d5d1ad0708cc43f78a9ef589b1465a",
+    "src/mujocoMartyPhysics.ts": "9b26e19eed50add692a2487a90f9a6748d84bf30227bd517cd0c3db405ecaffa",
+    "public/vendor/marty2_description/meshes/arm.stl": "df905d36e32c574bc949996ecf9029ab3c28e89a14d33bf21cdb1627cd32c544",
+    "public/vendor/marty2_description/meshes/arm_servo_gear.stl": "a933ded4b2ce0d2fd33a3a9e1efefcec8d3072d87a9fbb20b1611d1f17ce1413",
+    "public/vendor/marty2_description/meshes/eye_left.stl": "2a0332e6354fce505fe760b9b2eee4c2cad238294d0b0a3d995992fcdf8a1e0e",
+    "public/vendor/marty2_description/meshes/eye_right.stl": "f78fd2f1dbe608cb4873a90182283d086869059c08b76123244ea22e2cd326a6",
+    "public/vendor/marty2_description/meshes/foot.stl": "4889eb153b0fdda355af0f54f2ea626409906e357cd50bfa9b03f55d1d1ceaf7",
+    "public/vendor/marty2_description/meshes/hand.stl": "8e6c4ac08a8db595360327c15dddfac75582541e5fbb2409fd4b1fcaba9bb4a9",
+    "public/vendor/marty2_description/meshes/head.stl": "28846062ef22fa81118513dab987481b6380a399dabbc671e4b4e34f91b6bdf7",
+    "public/vendor/marty2_description/meshes/hip.stl": "7c7d70bd9e7c1a4caa81645a4a801dd448cd1bc747fac13638445227135be0a2",
+    "public/vendor/marty2_description/meshes/knee_lower.stl": "f4ca013ebbfa580119c5f4b80f5b4c4d96f8323caf7dabde1ae717dc6eaa9d18",
+    "public/vendor/marty2_description/meshes/knee_upper.stl": "1c4ba72f2298fe7171e976b96edada138efba8ddff95f452e1dfe9237472a9d4",
+    "public/vendor/marty2_description/meshes/shin.stl": "46f92cc3b1e5b8add260eb257bc2de7a22bb0e62e78ae2479d0eaf78d5637ff4",
+    "public/vendor/marty2_description/meshes/side_panel.stl": "ae0413776ef68e721d355c847259fc3388d20fb5cf761346ba44899a46a11afc",
+    "public/vendor/marty2_description/meshes/thigh.stl": "37b76f88d7fa4f1588d272647de12bbf32276360e4c774c1e201b833315b3fc5",
+    "public/vendor/marty2_description/meshes/twist_lower.stl": "d5abaf3a1fabb9a18142407317c89db3f1608cecc7efcc60addde1162616e673",
+    "public/vendor/marty2_description/meshes/twist_upper.stl": "3bfd24f35613e4acc830d33218aa0f94c322df886a432e45f8885854abe0939e"
+  }
+}

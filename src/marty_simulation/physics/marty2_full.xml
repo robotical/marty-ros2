@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="marty2_full">
+  <!--Generated from public/physics/marty2_kinematics.json, public/physics/marty2_inertials.json, public/physics/marty2_collisions.json, and public/physics/marty2_servo_supplier_envelopes.json.-->
+  <compiler angle="radian" autolimits="true" />
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast" />
+  <default>
+    <position ctrllimited="true" />
+  </default>
+  <worldbody>
+    <geom name="floor" type="plane" size="20 20 0.05" contype="0" conaffinity="1" rgba="0.35 0.62 0.52 1" />
+    <body name="base_link" pos="0 0 0.15338">
+      <freejoint name="base_link_free" />
+      <body name="head" pos="0 0 0" euler="0 0 0">
+        <inertial pos="0.02 0 0.035" mass="0.1867" diaginertia="0.00052587167 0.00048697583 0.00048697583" />
+        <geom name="collision_head_0" type="box" pos="-1.86041e-05 0 0.036750719" size="0.041587796 0.060924497 0.040750719" contype="1" conaffinity="0" />
+        <body name="side_panel_left" pos="0.0025 0.05744 0.04221" euler="-0.0361 0 0">
+          <inertial pos="0 0 0" mass="0.0217" diaginertia="1.8083333e-05 1.1980208e-05 6.916875e-06" />
+          <geom name="collision_side_panel_left_0" type="box" pos="0 -0.0056750004 -0.0095458124" size="0.017385276 0.013075 0.032269659" contype="1" conaffinity="0" />
+          <body name="arm_servo_gear_left" pos="0 0.00025 0" euler="0 0 0">
+            <joint name="arm_servo_gear_left_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-0.95 2.05" limited="true" />
+            <inertial pos="0 0 0" mass="0.004" diaginertia="2.56333e-07 4.16667e-07 2.56333e-07" />
+            <geom name="collision_arm_servo_gear_left_0" type="box" pos="8.126744e-06 0.00025000004 -1.341217e-06" size="0.017990294 0.0047499998 0.017980758" contype="1" conaffinity="0" />
+          </body>
+          <body name="arm_left" pos="0 0 -0.0302" euler="0 0 0">
+            <joint name="arm_left_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-2.68 1.24" limited="true" />
+            <inertial pos="0 0 -0.03" mass="0.005" diaginertia="1.927083e-06 1.854167e-06 2.60417e-07" />
+            <geom name="collision_arm_left_0" type="box" pos="0 0.018363036 -0.021873386" size="0.013979778 0.018363036 0.035869441" contype="1" conaffinity="0" />
+            <body name="hand_left" pos="0 0.033 -0.05539" euler="0.34906585 0 0">
+              <inertial pos="0 0 0" mass="0.003" diaginertia="4.36e-07 3.4225e-07 7.0625e-07" />
+              <geom name="collision_hand_left_0" type="box" pos="0 0 -0.012090381" size="0.0074999998 0.01461352 0.015890381" contype="1" conaffinity="0" />
+            </body>
+          </body>
+        </body>
+        <body name="side_panel_right" pos="0.0025 -0.05744 0.04221" euler="0.0361 0 0">
+          <inertial pos="0 0 0" mass="0.0217" diaginertia="1.8083333e-05 1.1980208e-05 6.916875e-06" />
+          <geom name="collision_side_panel_right_0" type="box" pos="-7.1628e-08 0.0056750096 -0.0095458124" size="0.017385276 0.013075028 0.032269659" contype="1" conaffinity="0" />
+          <body name="arm_servo_gear_right" pos="0 -0.00025 0" euler="0 0 0">
+            <joint name="arm_servo_gear_right_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-0.95 2.05" limited="true" />
+            <inertial pos="0 0 0" mass="0.004" diaginertia="2.56333e-07 4.16667e-07 2.56333e-07" />
+            <geom name="collision_arm_servo_gear_right_0" type="box" pos="-1.61779e-06 -0.00024996179 3.896666e-06" size="0.017997509 0.004749989 0.017991975" contype="1" conaffinity="0" />
+          </body>
+          <body name="arm_right" pos="0 0 -0.0302" euler="0 0 0">
+            <joint name="arm_right_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-2.68 1.24" limited="true" />
+            <inertial pos="0 0 -0.03" mass="0.005" diaginertia="1.927083e-06 1.854167e-06 2.60417e-07" />
+            <geom name="collision_arm_right_0" type="box" pos="1.8366e-08 -0.018363016 -0.021873386" size="0.013979791 0.018363096 0.035869441" contype="1" conaffinity="0" />
+            <body name="hand_right" pos="0 -0.033 -0.05539" euler="-0.34906585 0 0">
+              <inertial pos="0 0 0" mass="0.003" diaginertia="4.36e-07 3.4225e-07 7.0625e-07" />
+              <geom name="collision_hand_right_0" type="box" pos="0 0 -0.012090381" size="0.0074999998 0.01461352 0.015890381" contype="1" conaffinity="0" />
+            </body>
+          </body>
+        </body>
+        <body name="eye_left" pos="0.0457 0.0241 0.04671" euler="0 0 0">
+          <joint name="eye_left_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-3 0.25" limited="true" />
+          <inertial pos="0 0 0" mass="0.006" diaginertia="6.845e-07 6.845e-07 1.225e-06" />
+          <geom name="collision_eye_left_0" type="box" pos="-0.0038000001 0.0002748305 0.0064520435" size="0.0038000001 0.025070745 0.031247958" contype="1" conaffinity="0" />
+        </body>
+        <body name="eye_right" pos="0.0457 -0.0241 0.04671" euler="0 0 0">
+          <joint name="eye_right_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-0.25 3" limited="true" />
+          <inertial pos="0 0 0" mass="0.006" diaginertia="6.845e-07 6.845e-07 1.225e-06" />
+          <geom name="collision_eye_right_0" type="box" pos="-0.0038749999 -0.00021576168 0.006488715" size="0.0038749999 0.025014937 0.03128789" contype="1" conaffinity="0" />
+        </body>
+        <body name="hip_left" pos="0.01087 0.04709 -0.01465" euler="0 0 0">
+          <inertial pos="0 0 0" mass="0.0275" diaginertia="7.333333e-06 6.473958e-06 6.473958e-06" />
+          <geom name="collision_hip_left_0" type="box" pos="-0.015576159 -0.02135 0.0058202459" size="0.032226159 0.02135 0.019079755" contype="1" conaffinity="0" />
+          <body name="leg_left_thigh_front" pos="0 0.00025 0" euler="0 0 0">
+            <joint name="leg_left_thigh_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-1 1" limited="true" />
+            <inertial pos="0 0 -0.025" mass="0.005" diaginertia="1.320417e-06 1.395417e-06 1.95e-07" />
+            <geom name="collision_leg_left_thigh_front_0" type="box" pos="0.00245 -0.019217856 -0.023559131" size="0.010275 0.023917858 0.029265579" contype="1" conaffinity="0" />
+            <body name="leg_left_knee_upper" pos="0 -0.00015 -0.05" euler="0 0 0">
+              <joint name="leg_left_knee_upper_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-1 1" limited="true" />
+              <inertial pos="0 0 0" mass="0.004" diaginertia="2.66667e-07 3.41667e-07 3.41667e-07" />
+              <geom name="collision_leg_left_knee_upper_0" type="box" pos="-0.0081000002 -0.018850001 -0.00064650411" size="0.02625 0.018850001 0.013703496" contype="1" conaffinity="0" />
+              <body name="leg_left_twist_upper" pos="-0.0081 -0.01885 -0.00968" euler="0 0 0">
+                <inertial pos="0 0 0" mass="0.003" diaginertia="2.5625e-07 2.5625e-07 3.125e-07" />
+                <geom name="collision_leg_left_twist_upper_0" type="box" pos="0.002952992 0 -0.00012496766" size="0.018674015 0.018845174 0.0091226641" contype="1" conaffinity="0" />
+                <body name="leg_left_twist_lower" pos="0 0 0" euler="0 0 0">
+                  <joint name="leg_left_twist_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-1 1" limited="true" />
+                  <inertial pos="0 0 0" mass="0.0155" diaginertia="1.969792e-06 1.969792e-06 2.325e-06" />
+                  <geom name="collision_leg_left_twist_lower_0" type="box" pos="0 1.1176e-08 -0.0057518394" size="0.018850001 0.017736681 0.0057518394" contype="1" conaffinity="0" />
+                  <body name="leg_left_knee_lower" pos="-0.01885 0.0081 -0.02075" euler="0 0 0">
+                    <inertial pos="0 0 0" mass="0.0185" diaginertia="1.927083e-06 2.351042e-06 2.351042e-06" />
+                    <geom name="collision_leg_left_knee_lower_0" type="box" pos="0.02135 -0.0081000002 0.0013693529" size="0.02135 0.024750001 0.014628483" contype="1" conaffinity="0" />
+                    <body name="leg_left_shin_exterior" pos="0 0 0" euler="0 0 0">
+                      <joint name="leg_left_shin_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-1.5707963 1.5707963" limited="true" />
+                      <inertial pos="0 0 -0.025" mass="0.005" diaginertia="1.320417e-06 1.395417e-06 1.95e-07" />
+                      <geom name="collision_leg_left_shin_exterior_0" type="box" pos="0.019067857 0.0038163827 -0.023558971" size="0.023917858 0.0089086175 0.029265418" contype="1" conaffinity="0" />
+                      <body name="foot_left" pos="0 0 -0.05" euler="0 0 0">
+                        <joint name="foot_left_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-1.5707963 1.5707963" limited="true" />
+                        <inertial pos="0.018955281 -0.004681587 -0.0051223392" mass="0.016" diaginertia="4.562732e-06 1.1860113e-05 1.6244514e-05" />
+                        <geom name="collision_foot_left_0" type="box" pos="0.018950024 -0.0043500001 -0.0074" size="0.045973591 0.024723588 0.00089999987" contype="3" conaffinity="2" />
+                        <site name="left_foot_site" pos="0.018950024 -0.0043500001 -0.0082999999" size="0.004" rgba="1 1 0 1" />
+                        <site name="left_foot_contact_site" type="box" pos="0.018950024 -0.0043500001 -0.0074" size="0.045973591 0.024723588 0.00089999987" rgba="1 0.65 0 0.35" />
+                      </body>
+                    </body>
+                    <body name="leg_left_shin_interior" pos="0.0377 -0.0162 0" euler="0 0 0">
+                      <joint name="leg_left_shin_interior_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-1.5707963 1.5707963" limited="true" />
+                      <inertial pos="0 0 -0.025" mass="0.005" diaginertia="1.320417e-06 1.395417e-06 1.95e-07" />
+                      <geom name="collision_leg_left_shin_interior_0" type="box" pos="-0.019067764 -0.003816691 -0.023558971" size="0.023917858 0.0089086251 0.029265418" contype="1" conaffinity="0" />
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+          <body name="leg_left_thigh_back" pos="-0.0162 -0.03795 0" euler="0 0 0">
+            <joint name="leg_left_thigh_back_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-1 1" limited="true" />
+            <inertial pos="0 0 -0.025" mass="0.005" diaginertia="1.320417e-06 1.395417e-06 1.95e-07" />
+            <geom name="collision_leg_left_thigh_back_0" type="box" pos="-0.0024501498 0.019217763 -0.023559131" size="0.010275167 0.023917857 0.029265579" contype="1" conaffinity="0" />
+          </body>
+        </body>
+        <body name="hip_right" pos="0.01087 -0.00941 -0.01465" euler="0 0 0">
+          <inertial pos="0 0 0" mass="0.0275" diaginertia="7.333333e-06 6.473958e-06 6.473958e-06" />
+          <geom name="collision_hip_right_0" type="box" pos="-0.015576159 -0.02135 0.0058202459" size="0.032226159 0.02135 0.019079755" contype="1" conaffinity="0" />
+          <body name="leg_right_thigh_front" pos="0 0.00025 0" euler="0 0 0">
+            <joint name="leg_right_thigh_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-1 1" limited="true" />
+            <inertial pos="0 0 -0.025" mass="0.005" diaginertia="1.320417e-06 1.395417e-06 1.95e-07" />
+            <geom name="collision_leg_right_thigh_front_0" type="box" pos="0.00245 -0.019217856 -0.023559131" size="0.010275 0.023917858 0.029265579" contype="1" conaffinity="0" />
+            <body name="leg_right_knee_upper" pos="0 -0.00015 -0.05" euler="0 0 0">
+              <joint name="leg_right_knee_upper_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-1 1" limited="true" />
+              <inertial pos="0 0 0" mass="0.004" diaginertia="2.66667e-07 3.41667e-07 3.41667e-07" />
+              <geom name="collision_leg_right_knee_upper_0" type="box" pos="-0.0081000002 -0.018850001 -0.00064650411" size="0.02625 0.018850001 0.013703496" contype="1" conaffinity="0" />
+              <body name="leg_right_twist_upper" pos="-0.0081 -0.01885 -0.00968" euler="0 0 0">
+                <inertial pos="0 0 0" mass="0.003" diaginertia="2.5625e-07 2.5625e-07 3.125e-07" />
+                <geom name="collision_leg_right_twist_upper_0" type="box" pos="0.002952992 0 -0.00012496766" size="0.018674015 0.018845174 0.0091226641" contype="1" conaffinity="0" />
+                <body name="leg_right_twist_lower" pos="0 0 0" euler="0 0 0">
+                  <joint name="leg_right_twist_joint" type="hinge" pos="0 0 0" axis="0 0 1" range="-1 1" limited="true" />
+                  <inertial pos="0 0 0" mass="0.0155" diaginertia="1.969792e-06 1.969792e-06 2.325e-06" />
+                  <geom name="collision_leg_right_twist_lower_0" type="box" pos="0 1.1176e-08 -0.0057518394" size="0.018850001 0.017736681 0.0057518394" contype="1" conaffinity="0" />
+                  <body name="leg_right_knee_lower" pos="-0.01885 0.0081 -0.02075" euler="0 0 0">
+                    <inertial pos="0 0 0" mass="0.0185" diaginertia="1.927083e-06 2.351042e-06 2.351042e-06" />
+                    <geom name="collision_leg_right_knee_lower_0" type="box" pos="0.02135 -0.0081000002 0.0013693529" size="0.02135 0.024750001 0.014628483" contype="1" conaffinity="0" />
+                    <body name="leg_right_shin_exterior" pos="0.0377 -0.0162 0" euler="0 0 0">
+                      <joint name="leg_right_shin_exterior_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-1.5707963 1.5707963" limited="true" />
+                      <inertial pos="0 0 -0.025" mass="0.005" diaginertia="1.320417e-06 1.395417e-06 1.95e-07" />
+                      <geom name="collision_leg_right_shin_exterior_0" type="box" pos="-0.019067764 -0.003816691 -0.023558971" size="0.023917858 0.0089086251 0.029265418" contype="1" conaffinity="0" />
+                    </body>
+                    <body name="leg_right_shin_interior" pos="0 0 0" euler="0 0 0">
+                      <joint name="leg_right_shin_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-1.5707963 1.5707963" limited="true" />
+                      <inertial pos="0 0 -0.025" mass="0.005" diaginertia="1.320417e-06 1.395417e-06 1.95e-07" />
+                      <geom name="collision_leg_right_shin_interior_0" type="box" pos="0.019067857 0.0038163827 -0.023558971" size="0.023917858 0.0089086175 0.029265418" contype="1" conaffinity="0" />
+                      <body name="foot_right" pos="0 0 -0.05" euler="0 0 0">
+                        <joint name="foot_right_joint" type="hinge" pos="0 0 0" axis="1 0 0" range="-1.5707963 1.5707963" limited="true" />
+                        <inertial pos="0.018944685 -0.011518552 -0.0051223392" mass="0.016" diaginertia="4.562732e-06 1.1860113e-05 1.6244514e-05" />
+                        <geom name="collision_foot_right_0" type="box" pos="0.018949944 -0.011850139 -0.0074" size="0.04597371 0.024723864 0.00089999987" contype="3" conaffinity="2" />
+                        <site name="right_foot_site" pos="0.018949944 -0.011850139 -0.0082999999" size="0.004" rgba="1 1 0 1" />
+                        <site name="right_foot_contact_site" type="box" pos="0.018949944 -0.011850139 -0.0074" size="0.04597371 0.024723864 0.00089999987" rgba="1 0.65 0 0.35" />
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+          <body name="leg_right_thigh_back" pos="-0.0162 -0.03795 0" euler="0 0 0">
+            <joint name="leg_right_thigh_back_joint" type="hinge" pos="0 0 0" axis="0 1 0" range="-1 1" limited="true" />
+            <inertial pos="0 0 -0.025" mass="0.005" diaginertia="1.320417e-06 1.395417e-06 1.95e-07" />
+            <geom name="collision_leg_right_thigh_back_0" type="box" pos="-0.0024501498 0.019217763 -0.023559131" size="0.010275167 0.023917857 0.029265579" contype="1" conaffinity="0" />
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <equality>
+    <joint name="mimic_eye_right_joint" joint1="eye_right_joint" joint2="eye_left_joint" polycoef="0 -1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_arm_left_joint" joint1="arm_left_joint" joint2="arm_servo_gear_left_joint" polycoef="0 -1.3076923 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_arm_right_joint" joint1="arm_right_joint" joint2="arm_servo_gear_right_joint" polycoef="0 -1.3076923 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_leg_left_thigh_back_joint" joint1="leg_left_thigh_back_joint" joint2="leg_left_thigh_joint" polycoef="0 1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_leg_left_knee_upper_joint" joint1="leg_left_knee_upper_joint" joint2="leg_left_thigh_joint" polycoef="0 -1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_leg_left_shin_interior_joint" joint1="leg_left_shin_interior_joint" joint2="leg_left_shin_joint" polycoef="0 1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_foot_left_joint" joint1="foot_left_joint" joint2="leg_left_shin_joint" polycoef="0 -1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_leg_right_thigh_back_joint" joint1="leg_right_thigh_back_joint" joint2="leg_right_thigh_joint" polycoef="0 1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_leg_right_knee_upper_joint" joint1="leg_right_knee_upper_joint" joint2="leg_right_thigh_joint" polycoef="0 -1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_leg_right_shin_exterior_joint" joint1="leg_right_shin_exterior_joint" joint2="leg_right_shin_joint" polycoef="0 1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+    <joint name="mimic_foot_right_joint" joint1="foot_right_joint" joint2="leg_right_shin_joint" polycoef="0 -1 0 0 0" solref="0.004 1" solimp="0.95 0.99 0.0001 0.5 2" />
+  </equality>
+  <actuator>
+    <position name="eye_left_act" joint="eye_left_joint" ctrlrange="-3 0.25" forcelimited="true" forcerange="-0.0588399 0.0588399" />
+    <position name="arm_servo_gear_left_act" joint="arm_servo_gear_left_joint" ctrlrange="-0.95 2.05" forcelimited="true" forcerange="-0.0588399 0.0588399" />
+    <position name="arm_servo_gear_right_act" joint="arm_servo_gear_right_joint" ctrlrange="-0.95 2.05" forcelimited="true" forcerange="-0.0588399 0.0588399" />
+    <position name="leg_left_thigh_act" joint="leg_left_thigh_joint" ctrlrange="-1 1" forcelimited="true" forcerange="-0.08825985 0.08825985" />
+    <position name="leg_right_thigh_act" joint="leg_right_thigh_joint" ctrlrange="-1 1" forcelimited="true" forcerange="-0.08825985 0.08825985" />
+    <position name="leg_left_twist_act" joint="leg_left_twist_joint" ctrlrange="-1 1" forcelimited="true" forcerange="-0.0588399 0.0588399" />
+    <position name="leg_right_twist_act" joint="leg_right_twist_joint" ctrlrange="-1 1" forcelimited="true" forcerange="-0.0588399 0.0588399" />
+    <position name="leg_left_shin_act" joint="leg_left_shin_joint" ctrlrange="-1.5707963 1.5707963" forcelimited="true" forcerange="-0.08825985 0.08825985" />
+    <position name="leg_right_shin_act" joint="leg_right_shin_joint" ctrlrange="-1.5707963 1.5707963" forcelimited="true" forcerange="-0.08825985 0.08825985" />
+  </actuator>
+  <keyframe>
+    <key name="neutral" qpos="0 0 0.15338 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" ctrl="0 0 0 0 0 0 0 0 0" />
+    <key name="stand_straight" qpos="0 0 0.15338 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" ctrl="0 0 0 0 0 0 0 0 0" />
+    <key name="get_ready" qpos="0 0 0.15338 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" ctrl="0 0 0 0 0 0 0 0 0" />
+    <key name="get_ready_eyes_out" qpos="0 0 0.15338 1 0 0 0 -0.52359878 0.52359878 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" ctrl="-0.52359878 0 0 0 0 0 0 0 0" />
+    <key name="get_ready_eyes_in" qpos="0 0 0.15338 1 0 0 0 0.26179939 -0.26179939 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" ctrl="0.26179939 0 0 0 0 0 0 0 0" />
+  </keyframe>
+  <sensor>
+    <framepos name="base_link_position" objtype="xbody" objname="base_link" />
+    <framequat name="base_link_orientation" objtype="xbody" objname="base_link" />
+    <framepos name="left_foot_position" objtype="site" objname="left_foot_site" />
+    <touch name="left_foot_contact_force" site="left_foot_contact_site" />
+    <framepos name="right_foot_position" objtype="site" objname="right_foot_site" />
+    <touch name="right_foot_contact_force" site="right_foot_contact_site" />
+    <jointpos name="eye_left_pos" joint="eye_left_joint" />
+    <jointvel name="eye_left_vel" joint="eye_left_joint" />
+    <jointpos name="arm_servo_gear_left_pos" joint="arm_servo_gear_left_joint" />
+    <jointvel name="arm_servo_gear_left_vel" joint="arm_servo_gear_left_joint" />
+    <jointpos name="arm_servo_gear_right_pos" joint="arm_servo_gear_right_joint" />
+    <jointvel name="arm_servo_gear_right_vel" joint="arm_servo_gear_right_joint" />
+    <jointpos name="leg_left_thigh_pos" joint="leg_left_thigh_joint" />
+    <jointvel name="leg_left_thigh_vel" joint="leg_left_thigh_joint" />
+    <jointpos name="leg_right_thigh_pos" joint="leg_right_thigh_joint" />
+    <jointvel name="leg_right_thigh_vel" joint="leg_right_thigh_joint" />
+    <jointpos name="leg_left_twist_pos" joint="leg_left_twist_joint" />
+    <jointvel name="leg_left_twist_vel" joint="leg_left_twist_joint" />
+    <jointpos name="leg_right_twist_pos" joint="leg_right_twist_joint" />
+    <jointvel name="leg_right_twist_vel" joint="leg_right_twist_joint" />
+    <jointpos name="leg_left_shin_pos" joint="leg_left_shin_joint" />
+    <jointvel name="leg_left_shin_vel" joint="leg_left_shin_joint" />
+    <jointpos name="leg_right_shin_pos" joint="leg_right_shin_joint" />
+    <jointvel name="leg_right_shin_vel" joint="leg_right_shin_joint" />
+  </sensor>
+</mujoco>

@@ -9,6 +9,7 @@ Connect Marty V2 to ROS 2 over USB or Wi-Fi. The standalone driver provides acce
 
   - [[:martyv2:ros2:getting_started|Install and connect]] — build on Linux, configure the machine and robot, then read acceleration.
   - [[:martyv2:ros2:interfaces|Topics, services and movement]] — inspect the ROS graph and send movement commands.
+  - [[:martyv2:ros2:simulation|RViz simulation]] — run a simulated Marty and control its joints without hardware.
 
 Source: [[https://github.com/robotical/marty-ros2|robotical/marty-ros2]]. Target: Ubuntu 24.04, ROS 2 Jazzy and Python 3.12.
 
@@ -30,4 +31,4 @@ The guide starts the driver disconnected. ''/marty/connect'' opens the configure
 
 The IMU topic contains acceleration in m/s², including gravity; gyro and orientation are unavailable. Joint positions are in radians. Movement goals use firmware degrees and millimetres.
 
-The driver exposes walk, dance, kick, stand and single-joint movement. It does not yet include a calibrated RViz robot model, velocity control or odometry. [[https://github.com/robotical/marty-ros2/blob/main/docs/validation.md|Validation details]] distinguish automated checks from physical tests.
+The driver exposes walk, dance, kick, stand and single-joint movement. [[:martyv2:ros2:simulation|RViz simulation]] displays a separate simulated Marty. Displaying measured joints from physical Marty still needs a calibrated joint mapping; velocity control and odometry are not included. [[https://github.com/robotical/marty-ros2/blob/main/docs/validation.md|Validation details]] distinguish automated checks from physical tests.

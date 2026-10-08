@@ -1,0 +1,2 @@
+# Same engine version as marty-urdf-simulator; optional for the physical driver.
+mujoco==3.10.0

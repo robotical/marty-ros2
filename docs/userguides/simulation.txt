@@ -1,0 +1,101 @@
+---json
+{"name": "RViz simulation"}
+---
+====== RViz simulation ======
+{{indexmenu_n>30}}
+
+Run a simulated Marty V2 in ROS 2 and display it in RViz. Joint sliders or ROS topic commands set the pose; MuJoCo computes the joint feedback and floating base position. No physical Marty connection is needed.
+
+===== Build =====
+
+Use Ubuntu 24.04, ROS 2 Jazzy, Python 3.12 and Bash. Complete the **Install and build** and **Machine configuration** sections of [[:martyv2:ros2:getting_started|Install and connect]]. Robot connection configuration and driver launch are not needed for this simulation.
+
+From the repository root:
+
+<code bash>
+source scripts/setup_env.sh
+python -m pip install -r requirements-simulation.txt
+rosdep install --from-paths src --ignore-src -r -y
+python "$(command -v colcon)" build --base-paths src --symlink-install
+source scripts/setup_env.sh
+</code>
+
+''marty2_description'' contains the URDF and meshes; ''marty_simulation'' contains the MuJoCo bridge and RViz setup. Avoid a second package named ''marty2_description'' in the same workspace.
+
+===== Open RViz and joint controls =====
+
+<code bash>
+ros2 launch marty_simulation simulation.launch.py
+</code>
+
+RViz opens with Marty and a ground grid. Move the sliders in **Joint State Publisher** to change the simulated pose. Nine independent joints drive eleven mimic joints, including the opposite eyebrow and the arm gears.
+
+The launch starts only the simulation, joint controls, robot-state publisher and RViz. It does not start the physical driver. Ctrl+C in the launch terminal closes them.
+
+===== Send a pose from the console =====
+
+Stop the previous launch with Ctrl+C, then restart with the sliders disabled so they do not replace console commands:
+
+<code bash>
+ros2 launch marty_simulation simulation.launch.py gui:=false
+</code>
+
+In another terminal, from the repository root:
+
+<code bash>
+source scripts/setup_env.sh
+ros2 topic pub --once /marty_sim/joint_commands sensor_msgs/msg/JointState \
+  '{name: [eye_left_joint, arm_servo_gear_left_joint, arm_servo_gear_right_joint], position: [-0.5, 0.7, 0.7]}'
+ros2 topic echo /marty_sim/joint_states --once
+</code>
+
+The command changes the eyebrows and both arms. Positions are radians. Partial commands retain the other targets. Unknown joints, duplicate names, non-finite values and targets outside the actuator limits are rejected.
+
+===== ROS graph =====
+
+<code text>
+joint controls / console
+        |
+        v
+/marty_sim/joint_commands
+        |
+        v
+/marty_sim/marty_simulation (MuJoCo)
+        |                         |
+        v                         v
+/marty_sim/joint_states       floating-base TF
+        |                         |
+        v                         |
+/marty_sim/robot_state_publisher    |
+        |                         |
+        +----------> /tf <--------+
+                      |
+                      v
+                     RViz
+</code>
+
+^ Topic ^ Type ^ Purpose ^
+| ''/marty_sim/joint_commands'' | ''sensor_msgs/msg/JointState'' | Target positions for the nine independent joints. |
+| ''/marty_sim/joint_states'' | ''sensor_msgs/msg/JointState'' | Simulated positions and velocities, published at approximately 50 Hz. |
+| ''/marty_sim/robot_description'' | ''std_msgs/msg/String'' | URDF geometry used by RViz and joint controls. |
+| ''/tf'' and ''/tf_static'' | ''tf2_msgs/msg/TFMessage'' | Link transforms and the floating base pose. |
+
+Inspect the running setup with:
+
+<code bash>
+ros2 node list
+ros2 node info /marty_sim/marty_simulation
+ros2 topic list -t
+</code>
+
+===== Simulation modes =====
+
+The default ''mode:=stabilized'' uses height/tilt assistance and estimated joint damping to keep the model stable. ''mode:=free'' removes those aids:
+
+<code bash>
+ros2 launch marty_simulation simulation.launch.py mode:=free
+</code>
+
+The URDF, meshes and generated MuJoCo model come from the Marty URDF simulator. Contact, actuator and mass calibration is incomplete; physical motion accuracy and free walking are not validated. This setup accepts joint targets, rather than the physical driver's firmware ''Motion'' action.
+
+For a headless run, add ''gui:=false rviz:=false''. [[https://github.com/robotical/marty-ros2/blob/main/docs/simulation.md|Simulation reference]] includes model provenance and timing details.

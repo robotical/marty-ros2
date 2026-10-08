@@ -1,0 +1,7 @@
+Marty V2 URDF and STL meshes, Apache-2.0.
+Original marty2_description contributors: Alejandro Bordallo and Sandy Enoch.
+Upstream: https://github.com/robotical/marty2_description
+Copied from marty-urdf-simulator/public/vendor/marty2_description.
+Asset revision and SHA-256 hashes are recorded in marty_simulation/physics/sources.json.
+The expanded URDF and meshes are unchanged. The original mock-control launch
+files are not included; this package installs geometry only.

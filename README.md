@@ -130,7 +130,8 @@ ros2 service call /marty/disconnect std_srvs/srv/Trigger '{}'
 Connection starts no movement. Movement commands, topic types, configuration and
 model integration are described in [ROS interfaces](docs/interfaces.md).
 The accelerometer provides acceleration only; gyro and orientation are unavailable.
-Standalone RViz robot-model integration is not included yet.
+For a separate Marty simulation with joint controls and RViz, see
+[simulation](docs/simulation.md).
 
 The [Marty ROS 2 userguide](https://userguides.robotical.io/martyv2/ros2/start)
 covers setup, telemetry and movement commands.

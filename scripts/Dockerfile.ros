@@ -2,7 +2,8 @@ FROM ros:jazzy-ros-base@sha256:c3706ef0a0aa45413c07803cf433602f543b22e45b4855f6f
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     python3-pip python3-pytest python3-websockets ros-jazzy-diagnostic-msgs \
-    ros-jazzy-rosidl-default-generators && \
-    python3 -m pip install --break-system-packages 'martypy==3.7.2' && \
+    ros-jazzy-rosidl-default-generators ros-jazzy-robot-state-publisher \
+    ros-jazzy-joint-state-publisher-gui ros-jazzy-rviz2 && \
+    python3 -m pip install --break-system-packages 'martypy==3.7.2' 'mujoco==3.10.0' && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /ws

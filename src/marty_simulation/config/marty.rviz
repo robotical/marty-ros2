@@ -1,0 +1,55 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Ground
+      Enabled: true
+      Cell Size: 0.1
+      Plane Cell Count: 20
+      Color: 140; 145; 155
+      Alpha: 0.35
+      Reference Frame: world
+    - Class: rviz_default_plugins/RobotModel
+      Name: Marty
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /marty_sim/robot_description
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+      Visual Enabled: true
+      Collision Enabled: false
+      TF Prefix: marty_sim
+      Update Interval: 0
+      Alpha: 1
+  Enabled: true
+  Global Options:
+    Background Color: 235; 238; 242
+    Fixed Frame: world
+    Frame Rate: 30
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Current View
+      Target Frame: world
+      Distance: 0.65
+      Pitch: 0.3
+      Yaw: 0.6
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0.1
+      Near Clip Distance: 0.01
+Window Geometry:
+  Width: 1000
+  Height: 760
