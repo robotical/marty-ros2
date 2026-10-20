@@ -1,5 +1,34 @@
 # Validation record
 
+## Onboard Pi and network camera — 20 October 2026
+
+Marty's Pi 3B+ runs 64-bit Raspberry Pi OS Bookworm. Its expansion UART was
+configured as `/dev/ttyAMA0` with the serial console disabled. MartyPy 3.7.2
+identified RIC firmware 1.3.24 and received acceleration over the expansion cable
+at 921600 baud. No movement commands were sent.
+
+The headless Jazzy driver image was built on the Pi from the driver, interfaces
+and bringup packages. Mustang, running Ubuntu 24.04 and Jazzy, discovered the Pi
+node and successfully called `/marty/connect` over Wi-Fi. A six-second subscriber
+check on Mustang received 58 IMU samples, 26 status samples and 57 camera images.
+The final status was connected with fresh telemetry, no last error and no motion.
+
+The IMX708 camera uses native `rpicam-vid` and the Pi's hardware H.264 encoder.
+The TCP MPEG-TS feed was decoded on Mustang into 640×480 BGR images. A separate
+25-image check measured 10 fps and 25 distinct images; the image was also viewed
+in RViz. Best-effort delivery dropped large images locally, so the receiver and
+RViz use reliable QoS with depth 1.
+
+Stopping the camera service stopped new image publications. The same receiver
+reconnected after the service restarted and resumed fresh images at 10 fps.
+The receiver timestamps frame receipt on Mustang; exposure timestamps, camera
+calibration and camera-to-robot transforms have not been implemented.
+
+The driver container and camera service are started manually and have no boot
+autostart configuration. RViz is independent of the driver and receiver.
+
+## Earlier driver and simulation checks
+
 The software target is ROS Jazzy on Ubuntu 24.04, Python 3.12 and MartyPy 3.7.2.
 Automated checks were repeated on 8 October 2026 in disposable Linux containers.
 Physical USB checks below were completed on 1 October 2026.

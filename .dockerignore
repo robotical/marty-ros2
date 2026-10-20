@@ -1,0 +1,9 @@
+.git
+.venv
+.validation
+.runtime
+build
+install
+log
+**/__pycache__
+**/*.pyc

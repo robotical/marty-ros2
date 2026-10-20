@@ -1,0 +1,28 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Image
+      Name: Marty camera
+      Enabled: true
+      Image Topic: /marty/camera/image_raw
+      Topic:
+        Value: /marty/camera/image_raw
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+      Transport Hint: raw
+      Normalize Range: true
+      Queue Size: 1
+  Enabled: true
+  Global Options:
+    Background Color: 35; 38; 42
+    Fixed Frame: marty_camera_optical_frame
+    Frame Rate: 15
+  Tools: []
+Window Geometry:
+  Width: 1100
+  Height: 760

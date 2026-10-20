@@ -136,3 +136,5 @@ For a separate Marty simulation with joint controls and RViz, see
 The [Marty ROS 2 userguide](https://userguides.robotical.io/martyv2/ros2/start)
 covers setup, telemetry and movement commands.
 See [validation](docs/validation.md) for automated and physical checks.
+For an onboard Raspberry Pi driver and camera with RViz on another Linux machine,
+see [the Pi setup](examples/onboard-pi/README.md).
